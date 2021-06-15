@@ -25,7 +25,7 @@ run_kubeval() {
 # For all charts (i.e for every directory) in the directory
 for CHART in "$CHARTS_PATH"/*/; do
     echo "Validating $CHART Helm Chart...";
-    cd "$CHARTS_PATH/$CHART";
+    cd "$CURRENT_DIR/$CHARTS_PATH/$CHART";
     helm dependency build;
 
     for VALUES_FILE in values*.yaml; do
