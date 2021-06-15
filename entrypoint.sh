@@ -28,7 +28,7 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     helm dependency build;
 
-    for VALUES_FILE in values-*.yaml; do
+    for VALUES_FILE in values*.yaml; do
         echo "Validating $CHART Helm Chart using $VALUES_FILE values file...";
         run_kubeval "$(pwd)" "$VALUES_FILE"
     done
