@@ -29,6 +29,6 @@ for CHART in "$CHARTS_PATH"/*/; do
 
     for VALUES_FILE in values*.yaml; do
         echo "Validating $CHART Helm Chart using $VALUES_FILE values file...";
-        run_kubeval "$(pwd)" "$VALUES_FILE"
+        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS"
     done
 done
