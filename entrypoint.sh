@@ -19,7 +19,9 @@ run_kubeval() {
             "--openshift=$OPENSHIFT" \
             "--ignore-missing-schemas=$IGNORE_MISSING_SCHEMAS" \
         {} +;
-    rm -rf helm-output >> /dev/null 2>&1;
+    echo "Before rm";
+    rm -rf helm-output;
+    echo "After rm";
 }
 
 # For all charts (i.e for every directory) in the directory
