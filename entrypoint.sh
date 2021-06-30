@@ -25,9 +25,9 @@ run_kubeval() {
 # For all charts (i.e for every directory) in the directory
 for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
+    echo "Validating $CHART"
 
     for VALUES_FILE in values*.yaml; do
-        echo "Validating $CHART"
         run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set"
 #         if (echo $RESULT | grep -q ERR)
 #           then
