@@ -13,6 +13,7 @@ run_kubeval() {
     mkdir helm-output;
     echo "After mkdir";
     helm template --values "$VALUES_FILE" --output-dir helm-output .;
+    echo "Before find/kubeval";
     find helm-output -type f -exec \
         /kubeval/kubeval \
             "-o=$OUTPUT" \
@@ -21,7 +22,10 @@ run_kubeval() {
             "--openshift=$OPENSHIFT" \
             "--ignore-missing-schemas=$IGNORE_MISSING_SCHEMAS" \
         {} +;
+    echo "After find/kubeval";
+    echo "Before rm";
     rm -rf helm-output;
+    echo "After rm";
 }
 
 # For all charts (i.e for every directory) in the directory
