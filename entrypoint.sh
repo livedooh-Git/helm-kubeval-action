@@ -12,7 +12,7 @@ run_kubeval() {
     echo "Before mkdir";
     mkdir helm-output;
     echo "After mkdir";
-    helm template --values "$VALUES_FILE" --output-dir helm-output .;
+    helm template --values "$VALUES_FILE" --output-dir helm-output . &>/dev/null;
     echo "Before find/kubeval";
     find helm-output -type f -exec \
         /kubeval/kubeval \
