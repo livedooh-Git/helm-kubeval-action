@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 # Exit on error.
-set -e;
+#set -e;
 
 CURRENT_DIR=$(pwd);
 
@@ -25,19 +25,9 @@ run_kubeval() {
 # For all charts (i.e for every directory) in the directory
 for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
-
+    
     for VALUES_FILE in values*.yaml; do
-        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | grep -v -e '^$';
-#         if (echo $RESULT | grep -q ERR)
-#           then
-#               echo "$RESULT"
-#               echo "Errors found, setting exit status to 1."
-#               exit 1
-#           else
-#               echo "$RESULT"
-#               echo "No errors found, but check for warnings."
-#               exit 0
-#           fi
+        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | grep -e -v '^$'
     done
 done
 
