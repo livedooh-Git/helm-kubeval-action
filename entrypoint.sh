@@ -28,6 +28,7 @@ for CHART in "$CHARTS_PATH"/*/; do
 
     for VALUES_FILE in values*.yaml; do
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set")
+        echo $RESULT
         if (echo $RESULT | grep -q ERR)
           then
               echo "$RESULT"
