@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 # Exit on error.
-set -o;
+set -x;
 
 CURRENT_DIR=$(pwd);
 
