@@ -10,7 +10,7 @@ run_kubeval() {
     cd "$1"
     VALUES_FILE="$2"
     mkdir helm-output
-    helm template --values "$VALUES_FILE" --output-dir helm-output . > /dev/null 2>&1
+    helm template --values "$VALUES_FILE" --output-dir helm-output .
     find helm-output -type f -exec \
         /kubeval/kubeval \
             "-o=$OUTPUT" \
@@ -25,7 +25,6 @@ run_kubeval() {
 # For all charts (i.e for every directory) in the directory
 for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
-    echo "Validating $CHART"
 
     for VALUES_FILE in values*.yaml; do
         run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set"
