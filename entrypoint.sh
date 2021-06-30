@@ -27,18 +27,18 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
 
     for VALUES_FILE in values*.yaml; do
-        RESULT=$(run_kubeval $(pwd) $VALUES_FILE | grep -Ev "PASS|wrote|Set")
-        echo $RESULT
-        if (echo $RESULT | grep -q ERR)
-          then
-              echo "$RESULT"
-              echo "Errors found, setting exit status to 1."
-              exit 1
-          else
-              echo "$RESULT"
-              echo "No errors found, but check for warnings."
-              exit 0
-          fi
+        echo "Validating $CHART"
+        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set"
+#         if (echo $RESULT | grep -q ERR)
+#           then
+#               echo "$RESULT"
+#               echo "Errors found, setting exit status to 1."
+#               exit 1
+#           else
+#               echo "$RESULT"
+#               echo "No errors found, but check for warnings."
+#               exit 0
+#           fi
     done
 done
 
