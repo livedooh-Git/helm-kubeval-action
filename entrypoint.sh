@@ -2,7 +2,6 @@
 
 # Exit on error.
 set -e;
-set -o pipefail;
 
 CURRENT_DIR=$(pwd);
 
@@ -28,7 +27,12 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     
     for VALUES_FILE in values*.yaml; do
-        if run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+        OUTPUT=$(run_kubeval "$(pwd)" "$VALUES_FILE")
+        if [ $? -ne 0 ]; then
+            exit $?
+        fi
+        
+        echo OUTPUT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
   #      RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
   #      echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
     done
