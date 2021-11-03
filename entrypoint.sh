@@ -27,11 +27,11 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     
     for VALUES_FILE in values*.yaml; do
+        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
         if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -E "ERR|invalid|Error")
             then
                 exit 1
         fi
-        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
     done
 done
 
