@@ -29,7 +29,7 @@ for CHART in "$CHARTS_PATH"/*/; do
     for VALUES_FILE in values*.yaml; do
         set -e;
         run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
-        if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -E "Error")
+        if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep "Error")
             then
                 exit 1
         fi
