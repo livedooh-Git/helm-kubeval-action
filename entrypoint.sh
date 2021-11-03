@@ -7,6 +7,7 @@ CURRENT_DIR=$(pwd);
 
 run_kubeval() {
     # Validate all generated manifest against Kubernetes json schema
+    set -e;
     cd "$1"
     VALUES_FILE="$2"
     mkdir helm-output;
