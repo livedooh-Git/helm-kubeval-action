@@ -11,11 +11,6 @@ run_kubeval() {
     VALUES_FILE="$2"
     mkdir helm-output;
     helm template --values "$VALUES_FILE" --output-dir helm-output .;
-    if ($? -ne 0)
-        then
-            echo "Errors in template"
-            exit 1
-    fi
     find helm-output -type f -exec \
         /kubeval/kubeval \
             "-o=$OUTPUT" \
