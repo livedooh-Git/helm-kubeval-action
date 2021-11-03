@@ -27,13 +27,8 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     
     for VALUES_FILE in values*.yaml; do
-        OUTPUT=$(run_kubeval "$(pwd)" "$VALUES_FILE"); exitCode=$?;
-        if [ $exitCode -ne 0 ]; then
-            echo $exitCode
-            exit $exitCode
-        fi
-        
-        echo $OUTPUT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+        run_kubeval "$(pwd)" "$VALUES_FILE" \
+        | grep -Ev 'PASS|wrote|Set' | awk 'NF'
   #      RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
   #      echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
     done
