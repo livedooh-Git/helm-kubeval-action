@@ -18,7 +18,7 @@ run_kubeval() {
             "--kubernetes-version=$KUBERNETES_VERSION" \
             "--openshift=$OPENSHIFT" \
             "--ignore-missing-schemas=$IGNORE_MISSING_SCHEMAS" \
-        {} +;
+        {} + | grep -Ev 'PASS|wrote|Set' | awk 'NF'; 
     rm -rf helm-output;
 }
 
