@@ -34,7 +34,7 @@ for CHART in "$CHARTS_PATH"/*/; do
         elif (run_kubeval "$(pwd)" "$VALUES_FILE" | grep "invalid")
             then
                 exit 1
-        elif (run_kubeval "$(pwd)" "$VALUES_FILE" | grep "Error:")
+        elif (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -q Error)
             then
                 exit 1
         fi
