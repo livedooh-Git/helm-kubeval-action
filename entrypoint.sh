@@ -30,8 +30,8 @@ for CHART in "$CHARTS_PATH"/*/; do
         if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -E "ERR|invalid|Error")
             then
                 exit 1
-        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
         fi
+        run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
     done
 done
 
