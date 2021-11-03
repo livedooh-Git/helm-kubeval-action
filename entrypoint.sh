@@ -30,9 +30,9 @@ for CHART in "$CHARTS_PATH"/*/; do
       #  run_kubeval "$(pwd)" "$VALUES_FILE"
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE" 2>&1);
         echo $RESULT;
-        if (echo $RESULT | grep -q '^ERR|^Error|invalid' | wc -l) > 0; 
-            then
-                exit 1
+        if [[ $(echo $RESULT | grep -e '^ERR|^Error|invalid' | wc -l) > 0 ]] 
+        then
+            exit 1
         else
             echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
         fi
