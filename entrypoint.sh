@@ -28,11 +28,11 @@ for CHART in "$CHARTS_PATH"/*/; do
     
     for VALUES_FILE in values*.yaml; do
       #  run_kubeval "$(pwd)" "$VALUES_FILE"
-        RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE" 2>&1);
+        RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
         echo $RESULT;
         errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c)
         echo $errorMatchCount
-        hasError=$($errorMatchCount > 0)
+        hasError=$($errorMatchCount -gt 0)
         echo $hasError
         if [[ $hasError ]] 
         then
