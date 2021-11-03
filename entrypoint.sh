@@ -30,7 +30,11 @@ for CHART in "$CHARTS_PATH"/*/; do
       #  run_kubeval "$(pwd)" "$VALUES_FILE"
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE" 2>&1);
         echo $RESULT;
-        if [[ $(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c) > 0 ]] 
+        errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c)
+        echo $errorMatchCount
+        hasError=$($errorMatchCount > 0)
+        echo hasError
+        if [[ hasError ]] 
         then
             # exit 1
             echo 'bad'
