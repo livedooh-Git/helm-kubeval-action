@@ -29,7 +29,7 @@ for CHART in "$CHARTS_PATH"/*/; do
     for VALUES_FILE in values*.yaml; do
       #  run_kubeval "$(pwd)" "$VALUES_FILE"
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
-        if [ (echo $RESULT | grep -q '^ERR|^Error|invalid' | wc -l) > 0 ]; 
+        if (echo $RESULT | grep -q '^ERR|^Error|invalid' | wc -l) > 0; 
             then
                 exit 1
         fi
