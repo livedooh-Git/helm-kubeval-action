@@ -27,20 +27,14 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     
     for VALUES_FILE in values*.yaml; do
-      #  run_kubeval "$(pwd)" "$VALUES_FILE"
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
-        echo $RESULT;
         errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c)
-        echo $errorMatchCount
-        hasError=$($errorMatchCount -gt 0)
-        echo $hasError
+        hasError=$errorMatchCount > 0
+        echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+        
         if [[ $hasError ]] 
         then
-            # exit 1
-            echo 'bad'
-        else
-            echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
-            # echo 'ok'
+            exit 1
         fi
     done
 done
