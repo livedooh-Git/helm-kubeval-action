@@ -28,13 +28,7 @@ for CHART in "$CHARTS_PATH"/*/; do
     
     for VALUES_FILE in values*.yaml; do
         run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
-        if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -q ERR)
-            then
-                exit 1
-        elif (run_kubeval "$(pwd)" "$VALUES_FILE" | grep "invalid")
-            then
-                exit 1
-        elif (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -q Error)
+        if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -E ('ERR|invalid|Error'))
             then
                 exit 1
         fi
