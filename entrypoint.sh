@@ -20,10 +20,7 @@ run_kubeval() {
             "--ignore-missing-schemas=$IGNORE_MISSING_SCHEMAS" \
         {} +;
     rm -rf helm-output;
-    set -e;
 }
-
-set -e;
 
 # For all charts (i.e for every directory) in the directory
 for CHART in "$CHARTS_PATH"/*/; do
@@ -31,7 +28,6 @@ for CHART in "$CHARTS_PATH"/*/; do
     
     for VALUES_FILE in values*.yaml; do
         run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
-        set -e;
         if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -E "ERR|invalid|Error")
             then
                 exit 1
