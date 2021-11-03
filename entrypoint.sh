@@ -7,7 +7,6 @@ CURRENT_DIR=$(pwd);
 
 run_kubeval() {
     # Validate all generated manifest against Kubernetes json schema
-    set -e;
     cd "$1"
     VALUES_FILE="$2"
     mkdir helm-output;
@@ -21,6 +20,7 @@ run_kubeval() {
             "--ignore-missing-schemas=$IGNORE_MISSING_SCHEMAS" \
         {} +;
     rm -rf helm-output;
+    set -e;
 }
 
 # For all charts (i.e for every directory) in the directory
