@@ -33,7 +33,6 @@ for CHART in "$CHARTS_PATH"/*/; do
         if [[ $errorMatchCount -gt 0 ]]
         then
             exit 1;
-        else
         fi
     done
 done
