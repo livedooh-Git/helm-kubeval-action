@@ -11,6 +11,7 @@ run_kubeval() {
     VALUES_FILE="$2"
     mkdir helm-output;
     helm template --values "$VALUES_FILE" --output-dir helm-output .;
+    set -e;
     find helm-output -type f -exec \
         /kubeval/kubeval \
             "-o=$OUTPUT" \
@@ -28,7 +29,7 @@ for CHART in "$CHARTS_PATH"/*/; do
     
     for VALUES_FILE in values*.yaml; do
         run_kubeval "$(pwd)" "$VALUES_FILE" | grep -Ev "PASS|wrote|Set" | awk 'NF';
-        if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -q Error)
+        if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -E "ERR|invalid|Error")
             then
                 exit 1
         fi
