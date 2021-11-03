@@ -35,8 +35,8 @@ for CHART in "$CHARTS_PATH"/*/; do
             # exit 1
             echo 'bad'
         else
-            # echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
-            echo 'ok'
+            echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+            # echo 'ok'
         fi
     done
 done
