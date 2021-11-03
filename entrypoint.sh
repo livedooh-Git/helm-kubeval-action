@@ -28,9 +28,7 @@ for CHART in "$CHARTS_PATH"/*/; do
     
     for VALUES_FILE in values*.yaml; do
         echo $VALUES_FILE
-        run_kubeval "$(pwd)" "$VALUES_FILE" #\
-        #|| exit 1 \
-         #   | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+        run_kubeval "$(pwd)" "$VALUES_FILE" 1> >(grep -Ev 'PASS|wrote|Set' | awk 'NF')
   #      RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
   #      echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
     done
