@@ -28,11 +28,9 @@ for CHART in "$CHARTS_PATH"/*/; do
     
     for VALUES_FILE in values*.yaml; do
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
-        errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c)
-        hasError=$errorMatchCount > 0
         echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
         
-        if [[ $hasError ]] 
+        if (( $(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c) > 0 ))
         then
             exit 1
         fi
