@@ -31,7 +31,7 @@ for CHART in "$CHARTS_PATH"/*/; do
         echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
         
         errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c)
-        if (( $errorMatchCount > 0 ))
+        if [[ $errorMatchCount -gt 0 ]]
         then
             exit 1
         fi
