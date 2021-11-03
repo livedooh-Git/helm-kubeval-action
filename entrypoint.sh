@@ -33,8 +33,8 @@ for CHART in "$CHARTS_PATH"/*/; do
         errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c)
         echo $errorMatchCount
         hasError=$($errorMatchCount > 0)
-        echo hasError
-        if [[ hasError ]] 
+        echo $hasError
+        if [[ $hasError ]] 
         then
             # exit 1
             echo 'bad'
