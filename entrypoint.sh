@@ -32,9 +32,11 @@ for CHART in "$CHARTS_PATH"/*/; do
         echo $RESULT;
         if [[ $(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c) > 0 ]] 
         then
-            exit 1
+            # exit 1
+            echo 'bad'
         else
-            echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+            # echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+            echo 'ok'
         fi
     done
 done
