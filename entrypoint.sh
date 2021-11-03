@@ -27,7 +27,7 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     
     for VALUES_FILE in values*.yaml; do
-        if (run_kubeval "$(pwd)" "$VALUES_FILE") | grep -q "ERR|invalid|Error"
+        if (run_kubeval "$(pwd)" "$VALUES_FILE" | grep -q "ERR|invalid|Error" | wc -l) > 0
             then
                 exit 1
         fi
