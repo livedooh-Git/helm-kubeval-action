@@ -28,12 +28,13 @@ for CHART in "$CHARTS_PATH"/*/; do
     
     for VALUES_FILE in values*.yaml; do
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
-        echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF'
+        echo test;
+        echo $RESULT | grep -Ev 'PASS|wrote|Set' | awk 'NF';
         
-        errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c)
+        errorMatchCount=$(echo $RESULT | grep -E '^ERR|^Error|invalid' | wc -c);
         if [[ $errorMatchCount -gt 0 ]]
         then
-            exit 1
+            exit 1;
         fi
     done
 done
