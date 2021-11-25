@@ -13,7 +13,6 @@ run_kubeval() {
     helm template --values "$VALUES_FILE" --output-dir helm-output .;
     find helm-output -type f -exec \
         /kubeval/kubeval \
-            "--force-color" \
             "-o=$OUTPUT" \
             "--strict=$STRICT" \
             "--kubernetes-version=$KUBERNETES_VERSION" \
