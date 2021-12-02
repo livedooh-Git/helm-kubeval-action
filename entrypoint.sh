@@ -10,8 +10,8 @@ run_kubeval() {
     cd "$1"
     VALUES_FILE="$2"
     mkdir helm-output;
-    helm template --values "$VALUES_FILE" --output-dir helm-output .;
     set -e;
+    helm template --values "$VALUES_FILE" --output-dir helm-output .;
     find helm-output -type f -exec \
         /kubeval/kubeval \
             "-o=$OUTPUT" \
