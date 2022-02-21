@@ -28,7 +28,6 @@ for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     
     FILE="$(ls values-*.yaml)";
-    echo $FILE;
     for VALUES_FILE in $FILE; do
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
         echo "$RESULT" | grep -Ev '^PASS|^wrote|^\w+? - Set' | awk 'NF';
