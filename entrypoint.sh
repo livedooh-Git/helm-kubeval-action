@@ -27,7 +27,8 @@ run_kubeval() {
 for CHART in "$CHARTS_PATH"/*/; do
     cd "$CURRENT_DIR/$CHART";
     
-    for VALUES_FILE in values-*.yaml; do
+    FILE="$(ls values-*.yaml)";
+    for VALUES_FILE in $FILE; do
         RESULT=$(run_kubeval "$(pwd)" "$VALUES_FILE");
         echo "$RESULT" | grep -Ev '^PASS|^wrote|^\w+? - Set' | awk 'NF';
         errorMatchCount=$(echo "$RESULT" | grep -E '^ERR|^Error|invalid|nil' | wc -c);
