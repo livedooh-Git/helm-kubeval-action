@@ -35,7 +35,7 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: './Dockerfile'
+  image: 'docker://livedooh/helm-kubeval-action:latest'
   env:
     CHARTS_PATH: ${{ inputs.path }}
     CONFIG_FILE: ${{ inputs.config }}
